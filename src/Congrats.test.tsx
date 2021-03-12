@@ -8,21 +8,25 @@ Enzyme.configure({
     adapter: new EnzymeAdapter()
 });
 
-const setup = (props: CongratsProps = {}): ShallowWrapper => {
+const setup = (props: CongratsProps = { success: false }): ShallowWrapper => {
     return shallow(<Congrats { ...props } />)
 }
 
 test("renders without error", () => {
     const wrapper = setup();
-    const congratsComponent = findByTestAttr(wrapper, "component-congrats");
-    expect(congratsComponent).toHaveLength(1);
+    const component = findByTestAttr(wrapper, "component-congrats");
+    expect(component).toHaveLength(1);
 });
 
 test("renders no text when `success` prop is false", () => {
-
+    const wrapper = setup({ success: false });
+    const message = findByTestAttr(wrapper, "congrats-message");
+    expect(message.text()).toBe('');
 });
 
 test("renders non-empty congrats message when `success` prop is true", () => {
-
+    const wrapper = setup({ success: true });
+    const message = findByTestAttr(wrapper, "congrats-message");
+    expect(message.text().length).not.toBe(0);
 });
 

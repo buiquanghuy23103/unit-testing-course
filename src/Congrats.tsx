@@ -1,7 +1,7 @@
 import React from 'react';
 
 export type CongratsProps = {
-
+    success: boolean
 }
 
 /**
