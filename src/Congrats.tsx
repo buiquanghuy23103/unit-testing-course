@@ -10,8 +10,8 @@ export type CongratsProps = {
  */
 export default function Congrats(props: CongratsProps): JSX.Element {
     return (
-        <div>
-
+        <div data-test="component-congrats">
+            <span data-test="congrats-message">{ props.success ? "Congratulation! You guessed the word!" : "" }</span>
         </div>
     )
 }
