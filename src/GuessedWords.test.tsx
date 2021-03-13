@@ -1,4 +1,4 @@
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { findByTestAttr } from "../test/testUtils";
 import GuessedWords, { GuessedWordsProps } from "./GuessedWords";
 
@@ -7,13 +7,17 @@ const setup = (props: GuessedWordsProps) => {
 }
 
 describe("if there are no guessed words", () => {
+    let wrapper: ShallowWrapper;
+
+    beforeEach(() => {
+        wrapper = setup({ guessedWords: [] });
+    });
+
     test("renders without error", () => {
-        const wrapper = setup({ guessedWords: [] });
         const component = findByTestAttr(wrapper, "component-guessed-words");
         expect(component).toHaveLength(1);
     });
     test("renders instruction", () => {
-        const wrapper = setup({ guessedWords: [] });
         const instruction = findByTestAttr(wrapper, "instruction");
         expect(instruction.text().length).not.toBe(0);
     });
