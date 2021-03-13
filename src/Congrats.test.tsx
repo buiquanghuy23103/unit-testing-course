@@ -8,12 +8,12 @@ Enzyme.configure({
     adapter: new EnzymeAdapter()
 });
 
-const setup = (props: CongratsProps = { success: false }): ShallowWrapper => {
+const setup = (props: CongratsProps): ShallowWrapper => {
     return shallow(<Congrats { ...props } />)
 }
 
 test("renders without error", () => {
-    const wrapper = setup();
+    const wrapper = setup({ success: false });
     const component = findByTestAttr(wrapper, "component-congrats");
     expect(component).toHaveLength(1);
 });
