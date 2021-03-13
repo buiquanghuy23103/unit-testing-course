@@ -31,8 +31,8 @@ export default function GuessedWords(props: GuessedWordsProps) {
         content = (
             <div data-test="guessed-words-section">
                 <h3>Guessed words</h3>
-                <table>
-                    <thead>
+                <table className="table table-sm">
+                    <thead className="thead thead-light">
                         <tr>
                             <th>Guess</th>
                             <th>Matching letters</th>
