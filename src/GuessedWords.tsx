@@ -11,8 +11,8 @@ export type GuessedWordsProps = {
 
 export default function GuessedWords(props: GuessedWordsProps) {
     return (
-        <div>
-
+        <div data-test="component-guessed-words">
+            <h4 data-test="instruction">Try to guess the secret word</h4>
         </div>
     )
 }
