@@ -1,5 +1,10 @@
-import { GuessedWord } from "../GuessedWords";
+export function getLetterMatchCount(guessedWord: string, secretWord: string): number {
+    let count: number = 0;
 
-export function getLetterMarchCount(guessedWord: string, secretWord: string): number {
-    return -1;
+    Array.from(secretWord).forEach(character => {
+        if (guessedWord.includes(character)) count++;
+    });
+
+    return count;
+
 }
