@@ -4,6 +4,7 @@ type Props = {
     secretWord: string
 }
 export default function Input({ secretWord }: Props) {
+    const [currentGuess, setCurrentGuess] = React.useState("");
     return (
         <div data-test="component-input">
             <form className="form-inline">
@@ -12,6 +13,8 @@ export default function Input({ secretWord }: Props) {
                     className="form-control"
                     type="text"
                     placeholder="Enter guess"
+                    value={ currentGuess }
+                    onChange={ event => setCurrentGuess(event.target.value) }
                 />
                 <button
                     type="submit"
