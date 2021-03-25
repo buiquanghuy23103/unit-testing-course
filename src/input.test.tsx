@@ -34,7 +34,10 @@ describe('state controlled input field', () => {
         const wrapper = setup();
 
         const submitButton = findByTestAttr(wrapper, "submit-button");
-        submitButton.simulate('click');
+        // Clicking submit button will call event.preventDefault(),
+        // so the dummy preventDefault() here prevents the error
+        // "cannot call property of undefined"
+        submitButton.simulate('click', { preventDefault() { } });
 
         expect(mockSetCurrentGuess).toHaveBeenLastCalledWith("");
     });

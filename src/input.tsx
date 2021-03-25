@@ -5,6 +5,10 @@ type Props = {
 }
 export default function Input({ secretWord }: Props) {
     const [currentGuess, setCurrentGuess] = useState("");
+    function onSubmitButtonClick(event: React.MouseEvent) {
+        event.preventDefault();
+        setCurrentGuess("")
+    }
     return (
         <div data-test="component-input">
             <form className="form-inline">
@@ -20,7 +24,7 @@ export default function Input({ secretWord }: Props) {
                     type="submit"
                     className="btn btn-primary"
                     data-test="submit-button"
-                    onClick={ () => setCurrentGuess("") }>
+                    onClick={ (event) => onSubmitButtonClick(event) }>
 
                 </button>
             </form>
