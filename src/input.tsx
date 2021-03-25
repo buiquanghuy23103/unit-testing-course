@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 type Props = {
     secretWord: string
 }
 export default function Input({ secretWord }: Props) {
-    const [currentGuess, setCurrentGuess] = React.useState("");
+    const [currentGuess, setCurrentGuess] = useState("");
     return (
         <div data-test="component-input">
             <form className="form-inline">

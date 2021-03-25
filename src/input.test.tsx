@@ -5,7 +5,14 @@ import Input from "./input";
 
 const setup = (secretWord = "party") => {
     return shallow(<Input secretWord={ secretWord } />);
-}
+};
+
+const mockSetCurrentGuess = jest.fn();
+
+jest.mock('react', () => ({
+    ...jest.requireActual('react'),
+    useState: (initialState: any) => [initialState, mockSetCurrentGuess]
+}));
 
 test('should render without errors', () => {
     const wrapper = setup();
@@ -15,10 +22,6 @@ test('should render without errors', () => {
 
 describe('state controlled input field', () => {
     test('should update state upon input changes', () => {
-        const mockSetCurrentGuess = jest.fn();
-        // Mock useState() method
-        React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
-
         const wrapper = setup();
         const inputBox = findByTestAttr(wrapper, "input-box");
 
