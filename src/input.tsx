@@ -19,7 +19,8 @@ export default function Input({ secretWord }: Props) {
                 <button
                     type="submit"
                     className="btn btn-primary"
-                    data-test="submit-button">
+                    data-test="submit-button"
+                    onClick={ () => setCurrentGuess("") }>
 
                 </button>
             </form>
