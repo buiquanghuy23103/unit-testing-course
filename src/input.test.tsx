@@ -30,6 +30,14 @@ describe('state controlled input field', () => {
 
         expect(mockSetCurrentGuess).toHaveBeenCalledWith("train");
     });
+    test('should clear input upon submit button click', () => {
+        const wrapper = setup();
+
+        const submitButton = findByTestAttr(wrapper, "submit-button");
+        submitButton.simulate('click');
+
+        expect(mockSetCurrentGuess).toHaveBeenLastCalledWith("");
+    });
 
 })
 
