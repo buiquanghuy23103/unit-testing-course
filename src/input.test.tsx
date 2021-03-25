@@ -2,8 +2,8 @@ import { shallow } from "enzyme";
 import { findByTestAttr } from "../test/testUtils";
 import Input from "./input";
 
-const setup = () => {
-    return shallow(<Input />);
+const setup = (secretWord = "party") => {
+    return shallow(<Input secretWord={ secretWord } />);
 }
 
 test('should render without errors', () => {
