@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import React from "react";
 import { findByTestAttr } from "../test/testUtils";
-import Input from "./input";
+import Input from "./Input";
 
 const setup = (secretWord = "party") => {
     return shallow(<Input secretWord={ secretWord } />);
