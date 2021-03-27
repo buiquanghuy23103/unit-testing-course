@@ -17,7 +17,7 @@ const setup = (state: AppState) => {
     return wrapper;
 };
 
-describe('no words guessed', () => {
+describe('no guessed words in the initial state', () => {
     let wrapper: ReactWrapper;
 
     beforeEach(() => {
@@ -37,7 +37,7 @@ describe('no words guessed', () => {
 
 });
 
-describe('some words guessed', () => {
+describe('some guessed words in the initial state', () => {
     let wrapper: ReactWrapper;
 
     beforeEach(() => {
@@ -45,7 +45,7 @@ describe('some words guessed', () => {
             secretWord: 'party',
             success: false,
             guessedWords: [
-                { word: 'train', letterMatchCount: 3 }
+                { word: 'agile', letterMatchCount: 1 }
             ]
         };
 
@@ -59,7 +59,7 @@ describe('some words guessed', () => {
 
 });
 
-describe('correct guess', () => {
+describe('submit a correct guess', () => {
     let wrapper: ReactWrapper;
 
     beforeEach(() => {
@@ -67,7 +67,7 @@ describe('correct guess', () => {
             secretWord: 'party',
             success: false,
             guessedWords: [
-                { word: 'train', letterMatchCount: 3 }
+                { word: 'agile', letterMatchCount: 1 }
             ]
         };
         wrapper = setup(initialState);
@@ -82,13 +82,13 @@ describe('correct guess', () => {
 
     test('should add a row to GuessWords table', () => {
         const guessedWordRows = findByTestAttr(wrapper, 'guessed-word');
-        expect(guessedWordRows).toHaveLength(2);
+        expect(guessedWordRows).toHaveLength(3);
     });
 
 
     test('should display congrats message', () => {
-        const congratMessage = findByTestAttr(wrapper, 'congrats-message');
-        expect(congratMessage).toHaveLength(1);
+        const congratMessage = findByTestAttr(wrapper, 'congrats-message').text();
+        expect(congratMessage.length).toBeGreaterThan(0);
     });
 
     test('should hide input box', () => {
@@ -99,6 +99,6 @@ describe('correct guess', () => {
     test('should hide submit button', () => {
         const button = findByTestAttr(wrapper, 'submit-button');
         expect(button).toHaveLength(0);
-    })
+    });
 
 })
