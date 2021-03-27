@@ -1,10 +1,10 @@
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import React from "react";
 import { findByTestAttr } from "../test/testUtils";
 import Input from "./Input";
 
-const setup = (secretWord = "party") => {
-    return shallow(<Input secretWord={ secretWord } />);
+const setup = (secretWord: string = "", success: boolean = false) => {
+    return shallow(<Input success={ success } secretWord={ secretWord } />);
 };
 
 const mockSetCurrentGuess = jest.fn();
@@ -41,6 +41,43 @@ describe('state controlled input field', () => {
 
         expect(mockSetCurrentGuess).toHaveBeenLastCalledWith("");
     });
+});
 
+describe('correct guess', () => {
+
+    let wrapper: ShallowWrapper;
+
+    beforeEach(() => {
+        wrapper = setup('', true);
+    });
+
+    test('should hide input box', () => {
+        const inputBox = findByTestAttr(wrapper, 'input-box');
+        expect(inputBox).toHaveLength(0);
+    });
+
+    test('should hide submit button', () => {
+        const button = findByTestAttr(wrapper, 'submit-button');
+        expect(button).toHaveLength(0);
+    });
+
+
+});
+
+describe('incorrect guess', () => {
+    let wrapper: ShallowWrapper;
+
+    beforeEach(() => {
+        wrapper = setup();
+    });
+
+    test('should show input box', () => {
+        const inputBox = findByTestAttr(wrapper, 'input-box');
+        expect(inputBox).toHaveLength(1);
+    });
+
+    test('should show submit button', () => {
+        const button = findByTestAttr(wrapper, 'submit-button');
+        expect(button).toHaveLength(1);
+    });
 })
-
