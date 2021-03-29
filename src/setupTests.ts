@@ -5,7 +5,12 @@
 import '@testing-library/jest-dom';
 import Enzyme from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
+import enableHooks from 'jest-react-hooks-shallow';
 
 Enzyme.configure({
     adapter: new EnzymeAdapter()
 });
+
+// useEffect will get called when the component is shallow rendered
+// This is a workaround for the bug here: https://github.com/enzymejs/enzyme/issues/2086
+enableHooks(jest);
