@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="container" data-test="component-app">
       <h1>Jotto</h1>
-      <Input secretWord={ secretWord } />
+      <Input success={ success } secretWord={ secretWord } />
       <Congrats success={ success } />
       <GuessedWords guessedWords={ guessedWords } />
     </div>
