@@ -25,7 +25,7 @@ export default function Input({ secretWord, success }: Props) {
                 className="btn btn-primary"
                 data-test="submit-button"
                 onClick={ (event) => onSubmitButtonClick(event) }>
-
+                Submit
             </button>
         </form>
     );
