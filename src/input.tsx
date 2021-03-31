@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
+import { AppState } from './AppState';
 
 type Props = {
-    secretWord: string,
-    success: boolean
+    secretWord: string
 }
-export default function Input({ secretWord, success }: Props) {
+export default function Input({ secretWord }: Props) {
     const [currentGuess, setCurrentGuess] = useState("");
+    const success = useSelector((state: AppState) => state.success);
     function onSubmitButtonClick(event: React.MouseEvent) {
         event.preventDefault();
         setCurrentGuess("")
