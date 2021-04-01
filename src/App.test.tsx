@@ -1,14 +1,20 @@
-import { shallow } from "enzyme"
-import { findByTestAttr } from "../test/testUtils";
-import App from "./App"
+import { mount, shallow } from "enzyme"
+import { findByTestAttr, storeFactory } from "../test/testUtils";
+import App from "./App";
+import { AppState } from "./configureStore";
+import { Provider } from "react-redux";
 
 // Make sure getSecretWord doesn't make network call
 jest.mock('./actions');
 // eslint-disable-next-line import/first
 import { getSecretWord as mockGetSecretWord } from './actions';
 
-const setup = () => {
-    return shallow(<App />);
+
+const setup = (initialState: AppState = {
+    success: false
+}) => {
+    const store = storeFactory(initialState);
+    return mount(<Provider store={ store }><App /></Provider>);
 }
 
 test('should render without errors', () => {
