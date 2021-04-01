@@ -1,10 +1,10 @@
 import { ReactWrapper, ShallowWrapper } from "enzyme";
-import { createStore } from "redux";
-import { AppState } from "../src/configureStore";
+import { applyMiddleware, createStore } from "redux";
+import { AppState, middlewares } from "../src/configureStore";
 import rootReducer from '../src/reducers';
 
 export const storeFactory = (initialState: AppState) => {
-    return createStore(rootReducer, initialState);
+    return createStore(rootReducer, initialState, applyMiddleware(...middlewares));
 }
 
 /**
