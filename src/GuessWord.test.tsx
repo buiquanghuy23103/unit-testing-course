@@ -4,6 +4,8 @@ import { findByTestAttr, storeFactory } from "../test/testUtils";
 import App from "./App";
 import { AppState } from "./configureStore";
 
+// Make sure getSecretWord doesn't make network call
+jest.mock('./actions');
 
 
 const setup = (initialState: AppState) => {

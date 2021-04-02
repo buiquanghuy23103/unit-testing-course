@@ -3,11 +3,10 @@ import { findByTestAttr, storeFactory } from "../test/testUtils";
 import App from "./App";
 import { AppState } from "./configureStore";
 import { Provider } from "react-redux";
+import { getSecretWord } from "./actions";
 
 // Make sure getSecretWord doesn't make network call
 jest.mock('./actions');
-// eslint-disable-next-line import/first
-import { getSecretWord as mockGetSecretWord } from './actions';
 
 
 const setup = (initialState: AppState = {
@@ -27,23 +26,23 @@ test('should render without errors', () => {
 
 describe('get a secret word', () => {
     beforeEach(() => {
-        (mockGetSecretWord as jest.Mock).mockClear();
+        (getSecretWord as jest.Mock).mockClear();
     });
 
     test('should return a secret word upon app mount', () => {
         const wrapper = setup();
-        expect(mockGetSecretWord).toHaveBeenCalledTimes(1);
+        expect(getSecretWord).toHaveBeenCalledTimes(1);
     });
     test('should NOT return a secret word upon app update', () => {
         const wrapper = setup();
         // getSecretWord is called after app mount. This method will reset
         // the number of times getSecretWord is called to 0.
-        (mockGetSecretWord as jest.Mock).mockClear();
+        (getSecretWord as jest.Mock).mockClear();
 
         // use setProps because wrapper.update() doesn't trigger useEffect
         // https://github.com/enzymejs/enzyme/issues/2254
         wrapper.setProps({});
-        expect(mockGetSecretWord).toHaveBeenCalledTimes(0);
+        expect(getSecretWord).toHaveBeenCalledTimes(0);
     });
 
 
