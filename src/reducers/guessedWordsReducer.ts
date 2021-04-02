@@ -1,3 +1,6 @@
-export default function guessedWordsReducer(state: any, action: any) {
-    return null;
+import { GuessActionType } from "../actions/types";
+import { GuessedWord } from "../GuessedWords";
+
+export default function guessedWordsReducer(state: GuessedWord[] = [], action: GuessActionType): GuessedWord[] {
+    return state;
 }

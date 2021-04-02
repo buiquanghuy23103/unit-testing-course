@@ -1,15 +1,16 @@
 import axios from "axios";
 import { AppState } from "../configureStore";
-import { CORRECT_GUESS, GuessActionType } from "./types";
-
-export const actionTypes = {
-    CORRECT_GUESS: 'CORRECT_GUESS',
-    GUESS_WORD: 'GUESS_WORD'
-};
+import { CORRECT_GUESS, GuessActionType, GUESS_WORD } from "./types";
 
 export function guessWord(word: string) {
-    return function (dispatch: any, getState: AppState) {
-
+    return function (dispatch: any, getState: AppState): GuessActionType {
+        return {
+            type: GUESS_WORD,
+            payload: {
+                word: '',
+                letterMatchCount: 0
+            }
+        }
     };
 }
 
