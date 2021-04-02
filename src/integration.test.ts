@@ -83,6 +83,7 @@ describe('guessWord action dispatcher', () => {
             store.dispatch(guessWord(secretWord));
             const expectedState: AppState = {
                 ...initialState,
+                success: true,
                 guessedWords: [
                     {
                         word: 'agile',
