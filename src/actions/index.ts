@@ -1,17 +1,20 @@
 import axios from "axios";
-import { AppState } from "../configureStore";
+import { AppState, AppThunk } from "../configureStore";
+import { getLetterMatchCount } from "../helpers";
 import { CORRECT_GUESS, GuessActionType, GUESS_WORD } from "./types";
 
-export function guessWord(word: string) {
-    return function (dispatch: any, getState: AppState): GuessActionType {
-        return {
-            type: GUESS_WORD,
-            payload: {
-                word: '',
-                letterMatchCount: 0
-            }
-        }
-    };
+export const guessWord = (word: string): AppThunk => async (dispatch, getState) => {
+    const secretWord = getState().secretWord;
+    const letterMatchCount = getLetterMatchCount(word, secretWord);
+
+    dispatch({
+        type: GUESS_WORD,
+        payload: { word, letterMatchCount }
+    });
+
+    if (word === secretWord) {
+        dispatch(correctGuess());
+    }
 }
 
 export function correctGuess(): GuessActionType {

@@ -11,7 +11,9 @@ import { getSecretWord as mockGetSecretWord } from './actions';
 
 
 const setup = (initialState: AppState = {
-    success: false
+    success: false,
+    guessedWords: [],
+    secretWord: ''
 }) => {
     const store = storeFactory(initialState);
     return mount(<Provider store={ store }><App /></Provider>);
