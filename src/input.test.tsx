@@ -1,18 +1,16 @@
-import { mount, ReactWrapper, ShallowWrapper } from "enzyme";
+import { mount, shallow, ShallowWrapper } from "enzyme";
 import React from "react";
 import { Provider } from "react-redux";
 import { findByTestAttr, storeFactory } from "../test/testUtils";
-import Input from "./Input";
+import Input from "./input";
 
-const setup = (success: boolean = false, secretWord = '') => {
+const setup = (success: boolean = false) => {
     const store = storeFactory({
-        success: success
+        success: success,
+        secretWord: '',
+        guessedWords: []
     });
-    return mount(
-        <Provider store={ store }>
-            <Input secretWord={ secretWord } />
-        </Provider>
-    );
+    return mount(<Provider store={ store }><Input success={ success } /></Provider>)
 };
 
 const mockSetCurrentGuess = jest.fn();
@@ -53,7 +51,7 @@ describe('state controlled input field', () => {
 
 describe('correct guess', () => {
 
-    let wrapper: ReactWrapper;
+    let wrapper: ShallowWrapper;
 
     beforeEach(() => {
         wrapper = setup(true);
@@ -73,7 +71,7 @@ describe('correct guess', () => {
 });
 
 describe('incorrect guess', () => {
-    let wrapper: ReactWrapper;
+    let wrapper: ShallowWrapper;
 
     beforeEach(() => {
         wrapper = setup();
