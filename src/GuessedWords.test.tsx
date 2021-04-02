@@ -6,7 +6,7 @@ const setup = (props: GuessedWordsProps) => {
     return shallow(<GuessedWords { ...props } />)
 }
 
-describe.skip("if there are no guessed words", () => {
+describe("if there are no guessed words", () => {
     let wrapper: ShallowWrapper;
 
     beforeEach(() => {
@@ -23,7 +23,7 @@ describe.skip("if there are no guessed words", () => {
     });
 });
 
-describe.skip("if there are guessed words", () => {
+describe("if there are guessed words", () => {
     let wrapper: ShallowWrapper;
 
     const sampleGuessedWords: Array<GuessedWord> = [
