@@ -1,12 +1,14 @@
 import { mount, ReactWrapper } from "enzyme"
-import { findByTestAttr } from "../test/testUtils";
+import { Provider } from "react-redux";
+import { findByTestAttr, storeFactory } from "../test/testUtils";
 import App from "./App";
-import { AppState } from "./AppState";
+import { AppState } from "./configureStore";
 
 
 
-const setup = (state: AppState) => {
-    const wrapper = mount(<App />);
+const setup = (initialState: AppState) => {
+    const store = storeFactory(initialState);
+    const wrapper = mount(<Provider store={ store }><App /></Provider>);
 
     const inputBox = findByTestAttr(wrapper, "input-box");
     inputBox.simulate('change', { target: { value: 'train' } });
