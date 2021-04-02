@@ -11,7 +11,8 @@ describe('guessWord action dispatcher', () => {
         let store: AppStore;
         const initialState: AppState = {
             success: false,
-            guessedWords: []
+            guessedWords: [],
+            secretWord: 'party'
         };
 
         beforeEach(() => {
@@ -32,16 +33,69 @@ describe('guessWord action dispatcher', () => {
             expect(newState).toEqual(expectedState)
         });
         test('should udpate state correctly for correct guess', () => {
-
+            store.dispatch(guessWord(secretWord));
+            const expectedState: AppState = {
+                ...initialState,
+                success: true,
+                guessedWords: [{
+                    word: secretWord,
+                    letterMatchCount: 5
+                }]
+            };
+            const newState = store.getState();
+            expect(newState).toEqual(expectedState)
         });
 
     });
     describe('some guessed words were submitted', () => {
-        test('should udpate state correctly for incorrect guess', () => {
+        let store: AppStore;
+        const initialState: AppState = {
+            success: false,
+            guessedWords: [{
+                word: 'agile',
+                letterMatchCount: 1
+            }],
+            secretWord: 'party'
+        };
 
+        beforeEach(() => {
+            store = storeFactory(initialState);
+        });
+        test('should udpate state correctly for incorrect guess', () => {
+            store.dispatch(guessWord(incorrectGuess));
+            const expectedState: AppState = {
+                ...initialState,
+                guessedWords: [
+                    {
+                        word: 'agile',
+                        letterMatchCount: 1
+                    },
+                    {
+                        word: incorrectGuess,
+                        letterMatchCount: 3
+                    }
+                ]
+            };
+            const newState = store.getState();
+            expect(newState).toEqual(expectedState);
         });
         test('should udpate state correctly for correct guess', () => {
-
+            store.dispatch(guessWord(secretWord));
+            const expectedState: AppState = {
+                ...initialState,
+                guessedWords: [
+                    {
+                        word: 'agile',
+                        letterMatchCount: 1
+                    },
+                    {
+                        word: secretWord,
+                        letterMatchCount: 5
+                    }
+                ]
+            };
+            const newState = store.getState();
+            expect(newState).toEqual(expectedState);
         });
 
     });
