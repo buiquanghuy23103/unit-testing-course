@@ -1,4 +1,4 @@
-import { mount, shallow, ShallowWrapper } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import React from "react";
 import { Provider } from "react-redux";
 import { findByTestAttr, storeFactory } from "../test/testUtils";
@@ -51,7 +51,7 @@ describe('state controlled input field', () => {
 
 describe('correct guess', () => {
 
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
 
     beforeEach(() => {
         wrapper = setup(true);
@@ -71,7 +71,7 @@ describe('correct guess', () => {
 });
 
 describe('incorrect guess', () => {
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
 
     beforeEach(() => {
         wrapper = setup();
