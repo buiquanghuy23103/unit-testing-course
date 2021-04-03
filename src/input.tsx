@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
-import { AppState } from './AppState';
+import { useDispatch } from 'react-redux';
+import { guessWord } from './actions';
 
 type Props = {
-    secretWord: string
+    success: boolean
 }
-export default function Input({ secretWord }: Props) {
+export default function Input({ success }: Props) {
+
     const [currentGuess, setCurrentGuess] = useState("");
-    const success = useSelector((state: AppState) => state.success);
+
+    const dispatch = useDispatch();
+
     function onSubmitButtonClick(event: React.MouseEvent) {
         event.preventDefault();
-        setCurrentGuess("")
+        dispatch(guessWord(currentGuess));
+        setCurrentGuess("");
     }
+
     const inputForm = (
         <form className="form-inline">
             <input
