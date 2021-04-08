@@ -10,6 +10,7 @@ import Input from './input';
 function App() {
   const success = useSelector((state: AppState) => state.success);
   const guessedWords: GuessedWord[] = useSelector((state: AppState) => state.guessedWords);
+  const secretWord = useSelector((state: AppState) => state.secretWord);
 
   const dispatch = useDispatch();
 
@@ -20,6 +21,7 @@ function App() {
   return (
     <div className="container" data-test="component-app">
       <h1>Jotto</h1>
+      <p>The secret word is { secretWord }</p>
       <Input success={ success } />
       <Congrats success={ success } />
       <GuessedWords guessedWords={ guessedWords } />
