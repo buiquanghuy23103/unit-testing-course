@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AppState, AppThunk } from "../configureStore";
 import { getLetterMatchCount } from "../helpers";
-import { CORRECT_GUESS, GuessActionType, GUESS_WORD } from "./types";
+import { CORRECT_GUESS, GuessActionType, GUESS_WORD, SET_SECRET_WORD } from "./types";
 
 export const guessWord = (word: string): AppThunk => async (dispatch, getState) => {
     const secretWord = getState().secretWord;
@@ -23,8 +23,10 @@ export function correctGuess(): GuessActionType {
     };
 }
 
-export const getSecretWord = () => {
-    // TODO: write actual action 
+export const getSecretWord = (): AppThunk => async (dispatch) => {
     return axios.get('http://localhost:3030')
-        .then((response) => response.data);
+        .then((response) => dispatch({
+            type: SET_SECRET_WORD,
+            payload: response.data
+        }));
 }
