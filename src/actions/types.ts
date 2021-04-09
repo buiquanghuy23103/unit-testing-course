@@ -2,6 +2,7 @@ import { GuessedWord } from "../GuessedWords";
 
 export const CORRECT_GUESS = 'CORRECT_GUESS';
 export const GUESS_WORD = 'GUESS_WORD';
+export const SET_SECRET_WORD = 'SET_SECRET_WORD';
 export const NONE = 'NONE';
 
 interface CorrectGuessAction {
@@ -13,4 +14,12 @@ interface GuessWordAction {
     payload: GuessedWord
 }
 
-export type GuessActionType = CorrectGuessAction | GuessWordAction;
+interface SetSecretWordAction {
+    type: typeof SET_SECRET_WORD,
+    payload: string
+}
+
+export type GuessActionType =
+    CorrectGuessAction
+    | GuessWordAction
+    | SetSecretWordAction;
