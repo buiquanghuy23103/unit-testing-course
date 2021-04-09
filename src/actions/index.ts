@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AppState, AppThunk } from "../configureStore";
+import { AppThunk } from "../configureStore";
 import { getLetterMatchCount } from "../helpers";
 import { CORRECT_GUESS, GuessActionType, GUESS_WORD, SET_SECRET_WORD } from "./types";
 

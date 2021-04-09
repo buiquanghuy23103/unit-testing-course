@@ -1,4 +1,3 @@
-import { Store } from "redux";
 import { storeFactory } from "../test/testUtils";
 import { guessWord } from "./actions";
 import { AppState, AppStore } from "./configureStore";
@@ -20,7 +19,10 @@ describe('guessWord action dispatcher', () => {
         });
 
         test('should udpate state correctly for incorrect guess', () => {
-            store.dispatch(guessWord(incorrectGuess));
+            // The normal Dispatch type just does not support thunks per default. 
+            // The solution is using Dispatch<any>
+            // https://stackoverflow.com/questions/60049490/argument-of-type-thunkaction-is-not-assignable-to-parameter-of-type-anyaction 
+            store.dispatch<any>(guessWord(incorrectGuess));
             const expectedState: AppState = {
                 ...initialState,
                 success: false,
@@ -33,7 +35,7 @@ describe('guessWord action dispatcher', () => {
             expect(newState).toEqual(expectedState)
         });
         test('should udpate state correctly for correct guess', () => {
-            store.dispatch(guessWord(secretWord));
+            store.dispatch<any>(guessWord(secretWord));
             const expectedState: AppState = {
                 ...initialState,
                 success: true,
@@ -62,7 +64,7 @@ describe('guessWord action dispatcher', () => {
             store = storeFactory(initialState);
         });
         test('should udpate state correctly for incorrect guess', () => {
-            store.dispatch(guessWord(incorrectGuess));
+            store.dispatch<any>(guessWord(incorrectGuess));
             const expectedState: AppState = {
                 ...initialState,
                 guessedWords: [
@@ -80,7 +82,7 @@ describe('guessWord action dispatcher', () => {
             expect(newState).toEqual(expectedState);
         });
         test('should udpate state correctly for correct guess', () => {
-            store.dispatch(guessWord(secretWord));
+            store.dispatch<any>(guessWord(secretWord));
             const expectedState: AppState = {
                 ...initialState,
                 success: true,
