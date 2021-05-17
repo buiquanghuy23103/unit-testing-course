@@ -1,4 +1,4 @@
-import { mount, shallow } from "enzyme"
+import { mount } from "enzyme"
 import { findByTestAttr, storeFactory } from "../test/testUtils";
 import App from "./App";
 import { AppState } from "./configureStore";
@@ -26,6 +26,8 @@ test('should render without errors', () => {
 
 describe('get a secret word', () => {
     beforeEach(() => {
+        // getSecretWord is called after app mount. This method will reset
+        // the number of times getSecretWord is called to 0.
         (getSecretWord as jest.Mock).mockClear();
     });
 
@@ -35,9 +37,6 @@ describe('get a secret word', () => {
     });
     test('should NOT return a secret word upon app update', () => {
         const wrapper = setup();
-        // getSecretWord is called after app mount. This method will reset
-        // the number of times getSecretWord is called to 0.
-        (getSecretWord as jest.Mock).mockClear();
 
         // use setProps because wrapper.update() doesn't trigger useEffect
         // https://github.com/enzymejs/enzyme/issues/2254
